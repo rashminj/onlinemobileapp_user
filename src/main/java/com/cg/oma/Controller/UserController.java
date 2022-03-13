@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,6 +79,9 @@ public class UserController {
 	ResponseEntity<ResponseInfo> addingUser( @RequestBody User name,HttpServletRequest request){
 		String methodName="addUser()";
 		logger.info(methodName+"Called");
+		BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
+		String encodePwd=bcrypt.encode(name.getUserPassword());
+		name.setUserPassword(encodePwd);
 	String msg=userService.addUser(name);
 	ResponseInfo rinfo=new ResponseInfo(HttpStatus.CREATED.value(),HttpStatus.CREATED.name(),msg,request.getRequestURI());
 	ResponseEntity<ResponseInfo> rentity=new ResponseEntity<>(rinfo,HttpStatus.CREATED);

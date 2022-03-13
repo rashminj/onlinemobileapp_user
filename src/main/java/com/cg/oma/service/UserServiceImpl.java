@@ -24,10 +24,10 @@ public class UserServiceImpl implements IUserService {
      * Implementation for adding user
      */
 	@Override
-	public String addUser(User User) {
+	public String addUser(User user) {
 		String methodName="addUser()";
 		logger.info(methodName+"Called");
-		User result=repository.save(User);
+		User result=repository.save(user);
 		if(result!=null) {
 		return "User is added";
 		}
