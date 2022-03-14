@@ -33,7 +33,10 @@ class TestUserService {
 		//ur=Mockito.mock(IUserRepository.class);
 		u=new User("rashmi","rash","customer");
 	}
-		
+	
+	/*
+	 * Test case for adding user
+	 */
 	@Test
 	public void testAddUser() {
 		
@@ -45,6 +48,9 @@ class TestUserService {
 		
 		Mockito.verify(ur,Mockito.times(1)).save(u);
 	}
+	/*
+	 * Test case for updating user
+	 */
 	@Test
 	public void testUpdateUser() throws UserNotFoundException{
 		Mockito.when(ur.save(u)).thenReturn(u);
@@ -52,7 +58,9 @@ class TestUserService {
 		assertEquals(expectedResult,userService.updateUser(u));
 		Mockito.verify(ur,Mockito.times(1)).save(u);
 	}
-	
+	/*
+	 * Test case for removing user
+	 */
 	@Test
 	public void testRemoveUser() throws UserNotFoundException {
 		String y="rashmi";
@@ -62,6 +70,9 @@ class TestUserService {
 		Mockito.verify(ur,Mockito.times(1)).findByUserName(y);
 	
 	}
+	/*
+	 * Test case for showing all user
+	 */
 	@Test
 	public void testShowAllUsers() {
 	      
